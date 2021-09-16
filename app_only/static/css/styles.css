@@ -1,0 +1,79 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    width:1000px;
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+    text-align: center;
+    margin: auto;
+}
+
+#information_pattern {
+    display:flex;
+    padding-top: 20px;
+}
+
+#header {
+    width: 1000px;
+    height: 100px;
+    padding-top: 40px;
+}
+
+#home_links {
+    width: 1000px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#register {
+    width:400px;
+    border: 2px solid black;
+    margin-left: 40px;
+    padding: 15px;
+}
+
+#login {
+    width:400px;
+    border: 2px solid black;
+    margin-left: 50px;
+    padding: 15px;
+}
+
+form div{
+    margin-top: 15px;
+}
+
+a{
+    width: 500px;
+    text-align: center;
+}
+
+#home_table {
+    width: 1000px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-top:30px;
+    height: 400px;
+    overflow: auto;
+}
+
+th{
+    border: 1px solid black;
+    padding: 5px;
+}
+
+td{
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#create_account_link {
+    text-align: center;
+    font-size: x-large;
+    padding-top: 20px;
+}

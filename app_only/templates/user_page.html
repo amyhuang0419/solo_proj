@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/user_styles.css' %}">
+</head>
+<body>
+    <h2>Welcome, {{user.first_name}} {{user.last_name}}!!!</h2>
+    <br>
+    {% if messages %}
+        {% for message in messages %}
+            <p><strong>{{message}}</strong></p>
+        {% endfor %}
+    {% endif %}
+    <div class="logoutPosition">
+        <a href="/survey">Survey Page</a> | <a href="/logout">Log Out</a>
+    </div>
+    <div id="main_user_page">
+        <div>
+            <h3>Upload Sneaker below: (Upload {{user.sneaker_posted.all.count}} sneakers)</h3>
+            <table id="user_sneaker_info">
+                <tr>
+                    <th>Sneaker</th>
+                    <th>Upload time</th>
+                    <th>Upload image (Please upload your own iamge if you want more comments and likes!!!)</th>
+                    <th></th>
+                </tr>
+                {% for user_sneaker in user_sneakers %}
+                <tr>
+                    <td><a href="/sneakers/{{user_sneaker.id}}">{{user_sneaker.sneaker_name}} {{user_sneaker.color}}</a></td>
+                    <td>{{user_sneaker.created_at}}</td>
+                    <td>
+                        <form method="post" enctype="multipart/form-data" id="form_upload" action="/upload_image">
+                            {% csrf_token %}
+                            <input type="hidden" name="sneaker_id" value="{{user_sneaker.id}}">
+                            <input type="file" name="image">
+                            <button type="submit">Upload</button>
+                        </form>
+                    </td>
+                    <td><a href="/sneakers/{{user_sneaker.id}}/edit_page"><strong>Edit</strong></a> | <a href="/sneakers/{{user_sneaker.id}}/delete"><strong>Delete</strong></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <br>
+        <div id="comments_and_likes_table">
+            <div>
+                <h3>Comment Bar: (Count: {{user.user_comments.all.count}})</h3>
+                <table id="user_comment">
+                    <tr>
+                        <th>Sneaker Uploader</th>
+                        <th>Sneaker</th>
+                        <th>Comments</th>
+                    </tr>
+                    {% for user_comment in user_comments %}
+                    <tr>
+                        <td>{{user_comment.upload_on.posted_by.first_name}}</td>
+                        <td><a href="/sneakers/{{user_comment.upload_on.id}}">{{user_comment.upload_on.sneaker_name}} {{user_comment.upload_on.color}}</a></td>
+                        <td>
+                            <p>{{user_comment.comment}}</p>
+                            <br>
+                            <a href="/sneakers/{{user_comment.id}}/delete_comment"><strong>Delete</strong></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <br>
+            <div>
+                <h3>Like Bar: (Count: {{user.liked_sneakers.all.count}})</h3>
+                <table id="user_like">
+                    <tr>
+                        <th>Sneaker Uploader</th>
+                        <th>Sneaker</th>
+                        <th></th>
+                    </tr>
+                    {% for user_like in user_likes %}
+                    <tr>
+                        <td>{{user_like.posted_by.first_name}}</td>
+                        <td><a href="/sneakers/{{user_like.id}}">{{user_like.sneaker_name}} {{user_like.color}}</a></td>
+                        <td>
+                            <a href="/unlike/{{user_like.id}}/user_dashboard" class="unlike_button">UNLIKE</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="create_account_link">
+        <a href="/create_sneaker_page">Let's create a new sneaker blog!!!</a>
+    </div>
+</body>
+</html>

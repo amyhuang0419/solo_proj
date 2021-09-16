@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Sneaker Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/user_styles.css' %}">
+</head>
+<body>
+    <h2>Edit your Sneaker!!!</h2>
+    <div class="logoutPosition">
+        <a href="/user_dashboard">User Page</a> | <a href="/logout">Log Out</a>
+    </div>
+    <div class="main">
+        <div id="delete_button">
+            <a href="/sneakers/{{sneaker.id}}/delete"><strong>Delete This Sneaker</strong></a>
+        </div>
+        <div id="create_sneaker_info">
+            {% if messages %}
+                {% for message in messages %}
+                    <p><strong>{{message}}</strong></p>
+                {% endfor %}
+            {% endif %}
+            <form action="/sneakers/{{sneaker.id}}/edit" method="POST">
+                {% csrf_token %}
+                <div>
+                    <label>Sneaker: </label>
+                    <input type="text" name="sneaker_name" value="{{sneaker.sneaker_name}}">
+                </div>
+                <div>
+                    <label>Color: </label>
+                    <input type="text" name="color" value="{{sneaker.color}}">
+                </div>
+                <div>
+                    <label>SKU: </label>
+                    <input type="text" name="sku_number" value="{{sneaker.sku_number}}">
+                </div>
+                <div>
+                    <label>Release Price: $</label>
+                    <input type="number" name="release_price" value="{{sneaker.release_price}}">
+                </div>
+                <div>
+                    <label>Release Date: (MM/DD/YYYY)</label><br>
+                    <input type="date" name="release_date" min="1970-01-01" value="{{sneaker.release_date|date:'Y-m-d'}}">
+                </div>
+                <div>
+                    <label>Size: US</label>
+                    <select name="sneaker_size">
+                        <option value="none" selected disabled hidden>
+                            {{sneaker.sneaker_size}}
+                        </option>
+                        <option value="5">5</option>
+                        <option value="5.5">5.5</option>
+                        <option value="6">6</option>
+                        <option value="6.5">6.5</option>
+                        <option value="7">7</option>
+                        <option value="7.5">7.5</option>
+                        <option value="8">8</option>
+                        <option value="8.5">8.5</option>
+                        <option value="9">9</option>
+                        <option value="9.5">9.5</option>
+                        <option value="10">10</option>
+                        <option value="10.5">10.5</option>
+                        <option value="11">11</option>
+                        <option value="11.5">11.5</option>
+                        <option value="12">12</option>
+                        <option value="12.5">12.5</option>
+                        <option value="13">13</option>
+                        <option value="13.5">13.5</option>
+                        <option value="14">14</option>
+                        <option value="14.5">14.5</option>
+                        <option value="15">15</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Buy Price: $</label>
+                    <input type="number" name="buy_price" value="{{sneaker.buy_price}}">
+                </div>
+                <div>
+                    <input type="submit" value="Update">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/user_styles.css' %}">
+</head>
+<body>
+    <h2>Welcome to Sneakers Survey</h2>
+    <div class="logoutPosition">
+        <a href="/user_dashboard">User Page</a> | <a href="/logout">Log Out</a>
+    </div>
+    <div class="main">
+        <div id="survey_table">
+            <table>
+                <tr>
+                    <th>Sneaker</th>
+                    <th>Color</th>
+                    <th>Like or Unlike</th>
+                    <th>Likes</th>
+                    <th>Comments</th>
+                    <th>Images</th>
+                </tr>
+                {% for sneaker in sneakers %}
+                <tr>
+                    <!-- This is the Like and unLike button area -->
+                    <td><a href="/sneakers/{{sneaker.id}}">{{sneaker.sneaker_name}}</a></td>
+                    <td>{{sneaker.color}}</td>
+                    <td>
+                        {% if user not in sneaker.users_who_like.all %}
+                            <a href="/like/{{sneaker.id}}/survey_page" class="like_button"> LIKE </a>
+                        {% else %}
+                            <a href="/unlike/{{sneaker.id}}/survey_page" class="unlike_button">UNLIKE</a>
+                        {% endif %}
+                    </td>
+                    <td>{{sneaker.users_who_like.all.count }}</td>
+                    <td>
+                        {% if sneaker.sneaker_comments %}
+                        {% for comment in sneaker.sneaker_comments.all %}
+                            "{{comment.posted_by.first_name}}: {{comment.comment}}"
+                            <br>
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                    <td>
+                    {% if sneaker.sneaker_images %}
+                    {% for image in sneaker.sneaker_images.all %} 
+                        <img src="{{ image.image.url}}" alt="connect" style="max-height:80px">
+                    {% endfor %}
+                    {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

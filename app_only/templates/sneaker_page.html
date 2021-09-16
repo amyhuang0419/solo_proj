@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneaker Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/user_styles.css' %}">
+</head>
+<body>
+    <h2>{{one_of_sneaker.sneaker_name}}</h2>
+    <div class="logoutPosition">
+        <a href="/survey">Survey Page</a> | <a href="/user_dashboard">User Page</a> | <a href="/logout">Log Out</a>
+    </div>
+    <div class="main">
+        <div class="sneaker_page_image">
+            
+            {% if one_of_sneaker.sneaker_images %}
+                {% for image in one_of_sneaker.sneaker_images.all %} 
+                    <img src="{{ image.image.url}}" alt="connect" style="max-height:200px"> 
+                {% endfor %}
+            {% endif %}
+            
+        </div>
+        <div id="sneaker_info">
+            <div>
+                <label><strong>Sneaker Uploader: {{one_of_sneaker.posted_by.first_name}} {{one_of_sneaker.posted_by.last_name}}</strong></label>
+            </div>
+            <div>
+                <label><strong>Sneaker: {{one_of_sneaker.sneaker_name}}</strong></label>
+            </div>
+            <div>
+                <label><strong>Color: {{one_of_sneaker.color}}</strong></label>
+            </div>
+            <div>
+                <label><strong>SKU: {{one_of_sneaker.sku_number}}</strong></label>
+            </div>
+            <div>
+                <label><strong>Release Price: ${{one_of_sneaker.release_price}}</strong></label>
+            </div>
+            <div>
+                <label><strong>Release Date: {{one_of_sneaker.release_date}}</strong></label>
+            </div>
+            <div>
+                <label><strong>Upload: {{upload_count}}</strong></label>
+            </div>
+        </div>
+        <div>
+            <!-- This is the Like and unLike button area -->
+            <h3>Likes: {{one_of_sneaker.users_who_like.all.count }}  >>>> <br>
+                <div>
+                {% if user not in one_of_sneaker.users_who_like.all %}
+                    <div class="like_button"><a href="/like/{{one_of_sneaker.id}}"> LIKE </a></div>
+                {% else %}
+                    <label class="unlike_button"><a href="/unlike/{{one_of_sneaker.id}}">UNLIKE</a></label>
+                {% endif %}
+                </div>
+            </h3><br>
+            <div id="sneaker_buyer_info">
+                <h3><strong>Market Data: </strong></h3>
+                <table>
+                    <tr>
+                        <th>User</th>
+                        <th>Buy Price</th>
+                        <th>Size</th>
+                    </tr>
+                    {% for this_type_sneaker in this_type_sneakers %}
+                    <tr>
+                        <td>{{this_type_sneaker.posted_by.first_name}} {{this_type_sneaker.posted_by.last_name}}</td>
+                        <td>${{this_type_sneaker.buy_price}}</td>
+                        <td>US {{this_type_sneaker.sneaker_size}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div id="comment_bar">
+            <h3>Comments:</h3>
+            <br>
+            
+            <div>
+            {% for sneaker_comment in sneaker_comments %}
+                <p>{{sneaker_comment.posted_by.first_name}} {{sneaker_comment.posted_by.last_name}}:  {{sneaker_comment.comment}}</p>
+                <br>
+            {% endfor %}
+            </div>
+        
+        </div>
+    </div>
+    <div class="main">
+        <form action="/sneakers/{{one_of_sneaker.id}}/upload_comment" method="POST" id="comment_form">
+            {% csrf_token %}
+            <div>
+                <label>Leave a Comment: </label><br>
+                <textarea name="comment" rows="15" cols="60"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Comment">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

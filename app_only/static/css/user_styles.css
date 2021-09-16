@@ -1,0 +1,192 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+body{
+    padding: 10px;
+    /* text-align: right; */
+    margin: auto;
+}
+
+h2 {
+    width: 1000px;
+    text-align: left;
+    font-weight: bolder;
+}
+
+.logoutPosition {
+    position: fixed;
+    right: 10px;
+    top: 5px;
+}
+
+.main{
+    display:flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top:15px;
+    height: auto;
+}
+
+#user_sneaker_info {
+    border: 2px solid black;
+    padding: 10px;
+    overflow:auto;
+    height: 300px;
+}
+
+#user_comment {
+    border-radius: 10px;
+    border: 2px solid black;
+    overflow:auto;
+    margin-right: 20px;
+    background-color:violet;
+}
+
+#user_like {
+    border-radius: 10px;
+    border: 2px solid black;
+    overflow:auto;
+    margin-right: 20px;
+    background-color:blanchedalmond;
+}
+
+#create_account_link {
+    text-align: center;
+    font-size: x-large;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+th, td {
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 10px;
+}
+
+#create_sneaker_info {
+    text-align: center;
+}
+
+
+
+.sneaker_page_image {
+    height: 200px;
+    overflow: auto;
+    width: 400px;
+    margin-left: 20px;
+}
+
+
+#sneaker_buyer_info {
+    border: 2px solid black;
+    overflow:auto;
+    height: 200px;
+}
+
+#sneaker_info div{
+    margin-top: 15px;
+}
+
+#comment_bar {
+    border-radius: 15px;
+    text-align: left;
+    overflow: auto;
+    height: 150px;
+    font-weight: bold;
+    width: 600px;
+    border: 2px solid black;
+    padding: 20px
+}
+
+form div{
+    margin-top: 15px;
+}
+
+form {
+    border: 2px solid black;
+    padding: 20px;
+    width: 600px;
+    text-align: center;
+}
+
+#comment_form {
+    border: hidden;
+    padding: 20px;
+    width: 600px;
+    text-align: center;
+}
+
+#form_upload {
+    border: hidden;
+    padding: 20px;
+    width: 200px;
+    text-align: left;
+}
+
+#main_user_page {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top:15px;
+    height: auto;
+    text-align: center;
+    align-items: center;
+}
+
+
+#survey_table {
+    width: 1500px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-top:30px;
+    height: 600px;
+    overflow: auto;
+}
+
+#comments_and_likes_table {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.like_button {
+    border: 2px solid red;
+    background-color: red;
+    border-radius: 5px;
+    font-size:large;
+    font-weight: bolder;
+    width: 76px;
+    height:26px;
+    text-align: center;
+}
+
+.unlike_button {
+    border: 2px solid yellow;
+    background-color: yellow;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bolder;
+    width: 76px;
+    height:26px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+#delete_button {
+    font-weight: bolder;
+    font-size: xx-large;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    height: 35px;
+    background-color: black;
+}

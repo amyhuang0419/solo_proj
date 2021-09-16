@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div id="header">
+        <h1>Welcome to Sneakers Survey!!!!</h1>
+    </div>
+    <div id="home_links">
+        <a href="/login_register"><strong>Login or Registration</strong></a>
+    </div>
+    <div id="home_table">
+        <table>
+            <tr>
+                <th>Sneaker</th>
+                <th>Uploader</th>
+                <th>SKU</th>
+                <th>Release Time</th>
+                <th>Release Price</th>
+                <th>Color</th>
+                <th>Image</th>
+            </tr>
+            {% for sneaker in sneakers %}
+            <tr>
+                <!-- <td><a href="/sneakers/{{sneaker.id}}">{{sneaker.sneaker_name}}</a></td> -->
+                <td>{{sneaker.sneaker_name}}</td>
+                <td>{{sneaker.posted_by.first_name}}</td>
+                <td>{{sneaker.sku_number}}</td>
+                <td>{{sneaker.release_date}}</td>
+                <td>{{sneaker.release_price}}</td>
+                <td>{{sneaker.color}}</td>
+                <td>
+                {% if sneaker.sneaker_images %}
+                    {% for image in sneaker.sneaker_images.all %} 
+                    <img src="{{ image.image.url}}" alt="connect" style="max-height:80px">
+                    {% endfor %}
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div id="create_account_link">
+        <h2><strong>Want more details and rates?</strong></h2>
+        <br>
+        <a href="/login_register">Join Us!!!!</a>
+    </div>
+</body>
+</html>
